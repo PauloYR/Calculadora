@@ -3,12 +3,9 @@ package com.android.kcalculadora
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import java.lang.Exception
-import java.text.DecimalFormat
+import net.objecthunter.exp4j.ExpressionBuilder
 
 class MainActivity : AppCompatActivity() {
     lateinit var editText: EditText
@@ -43,36 +40,35 @@ class MainActivity : AppCompatActivity() {
 
     fun digite( s: String) {
         var auxS = s
+        conta = editText.text.toString()
         if( conta.length == 0) {
-            if (s.equals("+") ||s.equals("-") || s.equals("/") || s.equals("*")) auxS = ""
+            if (s.equals("+") ||s.equals("-") || s.equals("/") || s.equals("*")) {
+                auxS = ""
+            }else{
+                conta += auxS
+                editText.append(conta)
+            }
         }else{
-            if (conta.length > 1){
+            if (s.equals("+") || s.equals("-") || s.equals("/") || s.equals("*")) {
                 var auxS2 = conta.get(conta.length -2).toString()
                 auxS = verificarOperacao(auxS2,s)
-            }else if (s.equals("+")){
-                auxS = " + "
-            }else if (s.equals("-")){
-                auxS = " - "
-            }else if (s.equals("/")){
-                auxS = " / "
-            }else if (s.equals("*")) {
-                auxS = " * "
+                conta += auxS
+                editText.setText(conta)
+            }else{
+                conta = auxS
+                editText.append(conta)
             }
         }
-        conta += auxS
-
-        editText.setText(conta)
     }
-
-
-
     fun limpar() {
         editText.setText("")
         conta = ""
     }
 
     fun calcular() {
-        var expression = mutableListOf<Char>()
+        // Modo Difícil
+
+        /*var expression = mutableListOf<Char>()
         for (i in conta.indices) {
             var string: String = conta.get(i).toString()
             if (string.equals("+") || string.equals("-") || string.equals("/") || string.equals("*")) {
@@ -103,22 +99,17 @@ class MainActivity : AppCompatActivity() {
         }catch (e :NumberFormatException){
             editText.setText("0")
             conta = "0"
+        }*/
+
+        //Modo mamão com açucar
+
+        val expression = ExpressionBuilder(editText.text.toString()).build()
+        try{
+            val result = expression.evaluate()
+            editText.setText(result.toString())
+        }catch (ex: ArithmeticException){
+            Log.i("Erro", ex.toString())
         }
-
-    }
-
-    fun executarOperacao(numero1: Double, operador: Char, numero2: Double): Double {
-        var resultado: Double = 0.0
-            if (operador == '+') {
-                resultado = numero1 + numero2
-            } else if (operador == '-') {
-                resultado = numero1 - numero2
-            } else if (operador == '/') {
-                resultado = numero1 / numero2
-            } else if (operador == '*') {
-                resultado = numero1 * numero2
-            }
-        return resultado
     }
     fun deletar(int: Int){
         if (conta.length > 0){
@@ -127,7 +118,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun verificarOperacao(aux: String, operacao: String ) :String{
-        var retorno: String = ""
+        var retorno: String = operacao
         if (aux == operacao) {
             retorno = ""
         }else if(operacao.equals("+")){
@@ -175,4 +166,17 @@ class MainActivity : AppCompatActivity() {
         }
         return retorno
     }
+    /*fun executarOperacao(numero1: Double, operador: Char, numero2: Double): Double {
+        var resultado: Double = 0.0
+            if (operador == '+') {
+                resultado = numero1 + numero2
+            } else if (operador == '-') {
+                resultado = numero1 - numero2
+            } else if (operador == '/') {
+                resultado = numero1 / numero2
+            } else if (operador == '*') {
+                resultado = numero1 * numero2
+            }
+        return resultado
+    }*/
 }
