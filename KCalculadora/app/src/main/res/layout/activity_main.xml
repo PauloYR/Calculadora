@@ -5,7 +5,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity"
+        android:background="#fff">
 
     <EditText
             android:layout_width="0dp"
@@ -17,7 +18,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:inputType="number|numberDecimal" android:layout_marginTop="181dp" android:textColor="#000"
-            android:textStyle="bold" android:textSize="36sp"/>
+            android:textStyle="bold" android:textSize="36sp"
+            android:background="@android:color/transparent"/>
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="0dp"
@@ -35,27 +37,33 @@
                     android:text="7"
                     android:id="@+id/btn7"
                     android:onClick="positionButtom"
-            />
+                    android:background="@color/linha1"
+                    android:textSize="18sp"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="8"
                     android:onClick="positionButtom"
-
-                    android:id="@+id/btn8"/>
+                    android:background="@color/linha1"
+                    android:id="@+id/btn8"
+                    android:textSize="18sp"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="9"
                     android:onClick="positionButtom"
-                    android:id="@+id/btn9"/>
+                    android:background="@color/linha1"
+                    android:id="@+id/btn9"
+                    android:textSize="18sp"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="/"
                     android:onClick="positionButtom"
                     android:layout_weight="1"
-                    android:id="@+id/btnDividi"/>
+                    android:id="@+id/btnDividi"
+                    android:background="@color/linha1"
+                    android:textSize="18sp"/>
         </LinearLayout>
         <LinearLayout
                 android:layout_width="match_parent"
@@ -66,26 +74,34 @@
                     android:layout_height="match_parent"
                     android:text="4"
                     android:onClick="positionButtom"
-                    android:id="@+id/btn4"/>
+                    android:id="@+id/btn4"
+                    android:background="@color/linha2"
+                    android:textSize="18sp"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="5"
                     android:onClick="positionButtom"
-                    android:id="@+id/btn5"/>
+                    android:id="@+id/btn5"
+                    android:background="@color/linha2"
+                    android:textSize="18sp"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="6"
                     android:onClick="positionButtom"
-                    android:id="@+id/btn6"/>
+                    android:id="@+id/btn6"
+                    android:background="@color/linha2"
+                    android:textSize="18sp"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="x"
                     android:onClick="positionButtom"
                     android:layout_weight="1"
-                    android:id="@+id/btnMult" android:textAllCaps="false"/>
+                    android:id="@+id/btnMult" android:textAllCaps="false"
+                    android:background="@color/linha2"
+                    android:textSize="18sp"/>
         </LinearLayout>
         <LinearLayout
                 android:layout_width="match_parent"
@@ -96,26 +112,34 @@
                     android:layout_height="match_parent"
                     android:text="1"
                     android:onClick="positionButtom"
-                    android:id="@+id/btn1"/>
+                    android:id="@+id/btn1"
+                    android:background="@color/linha3"
+                    android:textSize="18sp"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="2"
                     android:onClick="positionButtom"
-                    android:id="@+id/btn2"/>
+                    android:id="@+id/btn2"
+                    android:background="@color/linha3"
+                    android:textSize="18sp"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="3"
                     android:onClick="positionButtom"
-                    android:id="@+id/btn3"/>
+                    android:id="@+id/btn3"
+                    android:background="@color/linha3"
+                    android:textSize="18sp"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="-"
                     android:onClick="positionButtom"
                     android:layout_weight="1"
-                    android:id="@+id/btnMenos"/>
+                    android:id="@+id/btnMenos"
+                    android:background="@color/linha3"
+                    android:textSize="18sp"/>
         </LinearLayout>
         <LinearLayout
                 android:layout_width="match_parent"
@@ -126,26 +150,34 @@
                     android:layout_height="match_parent"
                     android:text="0"
                     android:onClick="positionButtom"
-                    android:id="@+id/btn0"/>
+                    android:id="@+id/btn0"
+                    android:background="@color/linha4"
+                    android:textSize="18sp"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="."
                     android:onClick="positionButtom"
-                    android:id="@+id/btnPonto"/>
+                    android:id="@+id/btnPonto"
+                    android:background="@color/linha4"
+                    android:textSize="18sp"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="="
                     android:onClick="positionButtom"
-                    android:id="@+id/btnIgual"/>
+                    android:id="@+id/btnIgual"
+                    android:background="@color/linha4"
+                    android:textSize="18sp"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="+"
                     android:onClick="positionButtom"
                     android:layout_weight="1"
-                    android:id="@+id/btnMais"/>
+                    android:id="@+id/btnMais"
+                    android:background="@color/linha4"
+                    android:textSize="18sp"/>
 
         </LinearLayout>
         <LinearLayout
@@ -158,14 +190,16 @@
                     android:text="C"
                     android:layout_weight="1"
                     android:onClick="positionButtom"
-                    android:id="@+id/btnLimparT" android:textStyle="bold" android:textSize="18sp"/>
+                    android:id="@+id/btnLimparT" android:textStyle="bold" android:textSize="18sp"
+                    android:background="@color/linha5"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="DEL"
                     android:layout_weight="1"
                     android:onClick="positionButtom"
-                    android:id="@+id/btnDeletar" android:textSize="18sp" android:textStyle="bold"/>
+                    android:id="@+id/btnDeletar" android:textSize="18sp" android:textStyle="bold"
+                    android:background="@color/linha5"/>
         </LinearLayout>
     </LinearLayout>
 
