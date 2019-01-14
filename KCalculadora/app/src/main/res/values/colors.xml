@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="linha1">#CF27FF</color>
+    <color name="linha2">#EB63FF</color>
+    <color name="linha3">#FBA1FF</color>
+    <color name="linha4">#FCD0FF</color>
+    <color name="linha5">#FFFBEF</color>
 </resources>
