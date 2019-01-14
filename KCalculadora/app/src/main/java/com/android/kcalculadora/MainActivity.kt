@@ -9,14 +9,13 @@ import net.objecthunter.exp4j.ExpressionBuilder
 
 class MainActivity : AppCompatActivity() {
     lateinit var editText: EditText
-    lateinit var btnIgual: Button
+
     var conta: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         editText = findViewById(R.id.editTextConta)
-        btnIgual = findViewById(R.id.btnIgual)
-        btnIgual.isEnabled = false
+
     }
 
     fun positionButtom(view: View) = when (view.id) {
@@ -37,38 +36,39 @@ class MainActivity : AppCompatActivity() {
         R.id.btnPonto -> digite(".")
         R.id.btnLimparT -> limpar()
         R.id.btnIgual -> calcular()
-        R.id.btnDeletar-> deletar(1)
+        R.id.btnDeletar -> deletar(1)
         else -> Log.d("nada", "Algo diferente")
     }
 
-    fun digite( s: String) {
+    fun digite(s: String) {
         var auxS = s
         conta = editText.text.toString()
-        if( conta.length == 0) {
-            if (s.equals("+") ||s.equals("-") || s.equals("/") || s.equals("*")) {
+        if (conta.length == 0) {
+            if (s.equals("+") || s.equals("-") || s.equals("/") || s.equals("*")) {
                 auxS = ""
-            }else{
+            } else {
                 conta += auxS
                 editText.append(conta)
             }
-        }else{
-            btnIgual.isEnabled = true
+        } else {
+
             if (s.equals("+") || s.equals("-") || s.equals("/") || s.equals("*")) {
-                if(conta.length > 1) {
+                if (conta.length > 1) {
                     var auxS2 = conta.get(conta.length - 2).toString()
                     auxS = verificarOperacao(auxS2, s)
                     conta += auxS
                     editText.setText(conta)
-                }else{
-                    conta += " " +s+ " "
+                } else {
+                    conta += " " + s + " "
                     editText.setText(conta)
                 }
-            }else{
+            } else {
                 conta = auxS
                 editText.append(conta)
             }
         }
     }
+
     fun limpar() {
         editText.setText("")
         conta = ""
@@ -112,65 +112,69 @@ class MainActivity : AppCompatActivity() {
 
         //Modo mamão com açucar
 
-        val expression = ExpressionBuilder(editText.text.toString()).build()
-        try{
-            val result = expression.evaluate()
-            editText.setText(result.toString())
-        }catch (ex: ArithmeticException){
-            Log.i("Erro", ex.toString())
+        if (!editText.text.toString().equals("")) {
+            try {
+                val expression = ExpressionBuilder(editText.text.toString()).build()
+                val result: Double = expression.evaluate()
+                conta = result.toString()
+                editText.setText(conta)
+            } catch (ex: NumberFormatException) {
+                Log.e("Erro", ex.toString())
+                conta = "0"
+                editText.setText(conta)
+            }
         }
     }
-    fun deletar(int: Int){
-        if (conta.length > 1){
-            conta = conta.substring(0,conta.length - int)
+
+    fun deletar(int: Int) {
+        if (conta.length > 0) {
+            conta = conta.substring(0, conta.length - int)
             editText.setText(conta)
-            if (editText.text.toString().length ==0) btnIgual.isEnabled = false
         }
     }
-    fun verificarOperacao( aux: String,operacao: String ) :String{
+
+    fun verificarOperacao(aux: String, operacao: String): String {
         var retorno: String = operacao
         if (aux == operacao) {
             retorno = ""
-        }else if(operacao.equals("+")){
-            if (!aux.equals("+")){
-                retorno = "+ "
+        } else if (operacao.equals("+")) {
+            if (aux.equals("-") || aux.equals("/") || aux.equals("*")) {
+                retorno = operacao + " "
                 deletar(2)
-            }else{
+            } else {
                 retorno = " + "
             }
-        }
-        else if (operacao.equals("-")){
-            if (!aux.equals("-")){
-                retorno = "- "
+        } else if (operacao.equals("-")) {
+            if (aux.equals("+") || aux.equals("/") || aux.equals("*")) {
+                retorno = operacao + " "
                 deletar(2)
-            }else{
+            } else {
                 retorno = " - "
             }
-        }else if (operacao.equals("/")){
-            if (!aux.equals("/")){
-                retorno = "/ "
+        } else if (operacao.equals("/")) {
+            if (aux.equals("+") || aux.equals("-") || aux.equals("*")) {
+                retorno = operacao + " "
                 deletar(2)
-            }else{
+            } else {
                 retorno = " / "
             }
-        }else if (operacao.equals("*")){
-            if (!aux.equals("*")){
-                retorno = "* "
+        } else if (operacao.equals("*")) {
+            if (aux.equals("+") || aux.equals("/") || aux.equals("-")) {
+                retorno = operacao + " "
                 deletar(2)
-            }else{
+            } else {
                 retorno = " * "
             }
-        }else{
-            if (operacao.equals("+")){
+        } else {
+            if (operacao.equals("+")) {
                 retorno = " + "
-            }else if (operacao.equals("-")){
+            } else if (operacao.equals("-")) {
                 retorno = " - "
-            }else if (operacao.equals("/")){
+            } else if (operacao.equals("/")) {
                 retorno = " / "
-            }else if (operacao.equals("*")){
+            } else if (operacao.equals("*")) {
                 retorno = " * "
-            }
-            else{
+            } else {
                 retorno = operacao
             }
         }
