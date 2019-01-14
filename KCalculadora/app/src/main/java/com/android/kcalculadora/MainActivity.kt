@@ -9,11 +9,14 @@ import net.objecthunter.exp4j.ExpressionBuilder
 
 class MainActivity : AppCompatActivity() {
     lateinit var editText: EditText
+    lateinit var btnIgual: Button
     var conta: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         editText = findViewById(R.id.editTextConta)
+        btnIgual = findViewById(R.id.btnIgual)
+        btnIgual.isEnabled = false
     }
 
     fun positionButtom(view: View) = when (view.id) {
@@ -49,11 +52,17 @@ class MainActivity : AppCompatActivity() {
                 editText.append(conta)
             }
         }else{
+            btnIgual.isEnabled = true
             if (s.equals("+") || s.equals("-") || s.equals("/") || s.equals("*")) {
-                var auxS2 = conta.get(conta.length -2).toString()
-                auxS = verificarOperacao(auxS2,s)
-                conta += auxS
-                editText.setText(conta)
+                if(conta.length > 1) {
+                    var auxS2 = conta.get(conta.length - 2).toString()
+                    auxS = verificarOperacao(auxS2, s)
+                    conta += auxS
+                    editText.setText(conta)
+                }else{
+                    conta += " " +s+ " "
+                    editText.setText(conta)
+                }
             }else{
                 conta = auxS
                 editText.append(conta)
@@ -112,17 +121,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun deletar(int: Int){
-       if (editText.text.toString().length >0){
-            editText.setText(editText.text.toString().substring(0,editText.text.toString().length - int))
+        if (conta.length > 1){
+            conta = conta.substring(0,conta.length - int)
+            editText.setText(conta)
             if (editText.text.toString().length ==0) btnIgual.isEnabled = false
         }
     }
-    fun verificarOperacao(aux: String, operacao: String ) :String{
+    fun verificarOperacao( aux: String,operacao: String ) :String{
         var retorno: String = operacao
         if (aux == operacao) {
             retorno = ""
         }else if(operacao.equals("+")){
-            if (aux.equals("x")){
+            if (!aux.equals("+")){
                 retorno = "+ "
                 deletar(2)
             }else{
@@ -130,21 +140,21 @@ class MainActivity : AppCompatActivity() {
             }
         }
         else if (operacao.equals("-")){
-            if (aux.equals("-")){
+            if (!aux.equals("-")){
                 retorno = "- "
                 deletar(2)
             }else{
                 retorno = " - "
             }
         }else if (operacao.equals("/")){
-            if (aux.equals("/")){
+            if (!aux.equals("/")){
                 retorno = "/ "
                 deletar(2)
             }else{
                 retorno = " / "
             }
         }else if (operacao.equals("*")){
-            if (aux.equals("*")){
+            if (!aux.equals("*")){
                 retorno = "* "
                 deletar(2)
             }else{
