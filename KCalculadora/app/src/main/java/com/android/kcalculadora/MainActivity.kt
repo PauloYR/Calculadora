@@ -112,9 +112,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun deletar(int: Int){
-        if (conta.length > 0){
-        conta = conta.substring(0,conta.length - int)
-        editText.setText(conta)
+       if (editText.text.toString().length >0){
+            editText.setText(editText.text.toString().substring(0,editText.text.toString().length - int))
+            if (editText.text.toString().length ==0) btnIgual.isEnabled = false
         }
     }
     fun verificarOperacao(aux: String, operacao: String ) :String{
